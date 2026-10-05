@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Inventory Management System</title>
+
+</head>
+
+<body>
+
+<h1>Inventory Management System</h1>
+
+<h2>Add Product</h2>
+
+<form action="/add" method="POST">
+
+Product Name:
+<input type="text" name="name" required>
+
+<br><br>
+
+Category:
+<input type="text" name="category" required>
+
+<br><br>
+
+Supplier:
+<input type="text" name="supplier" required>
+
+<br><br>
+
+Price:
+<input type="number" name="price" required>
+
+<br><br>
+
+Quantity:
+<input type="number" name="quantity" required>
+
+<br><br>
+
+Reorder Level:
+<input type="number" name="reorder_level" required>
+
+<br><br>
+
+<button type="submit">
+Add Product
+</button>
+
+</form>
+
+<hr>
+
+<h2>Search Product</h2>
+
+<form action="/search">
+
+<input type="text" name="keyword">
+
+<button type="submit">
+Search
+</button>
+
+</form>
+
+<hr>
+
+<h2>Product List</h2>
+
+<table border="1">
+
+<tr>
+
+<th>ID</th>
+<th>Product Name</th>
+<th>Category</th>
+<th>Supplier</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Reorder Level</th>
+<th>Stock Status</th>
+<th>Delete</th>
+
+</tr>
+
+{% for product in products %}
+
+<tr>
+
+<td>{{ product['id'] }}</td>
+
+<td>{{ product['name'] }}</td>
+
+<td>{{ product['category'] }}</td>
+
+<td>{{ product['supplier'] }}</td>
+
+<td>{{ product['price'] }}</td>
+
+<td>{{ product['quantity'] }}</td>
+
+<td>{{ product['reorder_level'] }}</td>
+
+<td>
+{{ stock_status(product['quantity'], product['reorder_level']) }}
+</td>
+
+<td>
+
+<a href="/delete/{{ product['id'] }}">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
